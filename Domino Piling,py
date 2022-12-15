@@ -1,0 +1,6 @@
+def dominopiling(array):
+    if ((array[0] or array[1]) >= 2):
+        area  = array[0] * array[1]
+        return area//2
+print(dominopiling([3,3]))
+#10 minutes
