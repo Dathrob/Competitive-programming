@@ -1,21 +1,24 @@
-from collections import deque
-def calculate(array):
-    stack = deque()
-    num = ["1","2","3","4","5","6","7","9","0"]
-    calculator = ["+","-","/","*"]
-    for i in array:
-        if i in num:
-            stack.append(i)
-        else:
-            if i == "+":
-                stack.append(int(stack.pop()) + int(stack.pop()))
-            elif i == "-":
-                stack.append(int(stack.pop()) - int(stack.pop()))
-            elif i == "*":
-                stack.append(int(stack.pop()) * int(stack.pop()))
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        list1 = []
+        calculator = ["+","-","/","*"]
+        for i in tokens:
+            if i.isdigit():
+                list1.append(int(i))
+                
+            elif i.lstrip("-").isdigit():
+                list1.append((int(i)))
+                
             else:
-                stack.append(int(stack.pop()) / int(stack.pop()))
-            
-    return stack[-1]
-
-print(calculate(["2","1","+","3","*"]))
+                a = list1.pop()
+                b = list1.pop()
+                if i == "+":
+                    list1.append(b + a)
+                elif i == "-":
+                    list1.append(b - a)
+                elif i == "*":
+                    list1.append(b * a)
+                else:
+                    list1.append(int(b / a))
+               
+        return list1[-1]
